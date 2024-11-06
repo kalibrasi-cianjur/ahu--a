@@ -1,0 +1,29 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main    # Workflow ini akan dijalankan setiap kali ada push ke branch main
+  pull_request:
+    branches:
+      - main    # Workflow ini juga akan dijalankan saat ada pull request ke branch main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest   # Gunakan runner Ubuntu terbaru
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2   # Checkout kode dari repositori
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2  # Setup Node.js
+        with:
+          node-version: '16'    # Gunakan Node.js versi 16
+
+      - name: Install Dependencies
+        run: npm install   # Install dependensi Node.js
+
+      - name: Run Tests
+        run: npm test   # Jalankan tes
+
